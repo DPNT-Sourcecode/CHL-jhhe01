@@ -1,8 +1,5 @@
 package befaster.solutions.CHL;
 
-import befaster.runner.SolutionNotImplementedException;
-import befaster.solutions.CHK.CheckoutSolution;
-
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.HashMap;
@@ -11,7 +8,7 @@ import java.util.Map;
 
 public class CheckliteSolution {
 
-    private Map<String, CheckoutSolution.ItemPrice> priceMap = new HashMap<>();
+    private Map<String, ItemPrice> priceMap = new HashMap<>();
 
     /*
     +------+-------+----------------+
@@ -23,23 +20,23 @@ public class CheckliteSolution {
     | D    | 15    |                |
     +------+-------+----------------+
      */
-    public CheckoutSolution() {
-        CheckoutSolution.Offer offerA = new CheckoutSolution.Offer(3, BigDecimal.valueOf(130));
-        CheckoutSolution.ItemPrice priceA = new CheckoutSolution.ItemPrice("A", BigDecimal.valueOf(50), Collections.singletonList(offerA));
+    public CheckliteSolution() {
+        Offer offerA = new Offer(3, BigDecimal.valueOf(130));
+        ItemPrice priceA = new ItemPrice("A", BigDecimal.valueOf(50), Collections.singletonList(offerA));
         priceMap.put("A", priceA);
 
-        CheckoutSolution.Offer offerB = new CheckoutSolution.Offer(2, BigDecimal.valueOf(45));
-        CheckoutSolution.ItemPrice priceB = new CheckoutSolution.ItemPrice("B", BigDecimal.valueOf(30), Collections.singletonList(offerB));
+        Offer offerB = new Offer(2, BigDecimal.valueOf(45));
+        ItemPrice priceB = new ItemPrice("B", BigDecimal.valueOf(30), Collections.singletonList(offerB));
         priceMap.put("B", priceB);
 
-        CheckoutSolution.ItemPrice priceC = new CheckoutSolution.ItemPrice("C", BigDecimal.valueOf(20), Collections.emptyList());
+        ItemPrice priceC = new ItemPrice("C", BigDecimal.valueOf(20), Collections.emptyList());
         priceMap.put("C", priceC);
 
-        CheckoutSolution.ItemPrice priceD = new CheckoutSolution.ItemPrice("D", BigDecimal.valueOf(15), Collections.emptyList());
+        ItemPrice priceD = new ItemPrice("D", BigDecimal.valueOf(15), Collections.emptyList());
         priceMap.put("D", priceD);
     }
 
-    public Integer checkout(String skus) {
+    public Integer checklite(String skus) {
         if(skus == null) {
             return -1;
         } else if(skus.trim().isEmpty()) {
@@ -63,7 +60,7 @@ public class CheckliteSolution {
             String sku = itemQuantity.getKey().toString();
             int quantity = itemQuantity.getValue();
 
-            CheckoutSolution.ItemPrice itemPrice = priceMap.get(sku);
+            ItemPrice itemPrice = priceMap.get(sku);
 
             if(itemPrice == null) {
                 return -1;
@@ -72,9 +69,9 @@ public class CheckliteSolution {
             if(itemPrice.offers.isEmpty()) {
                 total += itemPrice.price.multiply(BigDecimal.valueOf(quantity)).intValue();
             } else {
-                List<CheckoutSolution.Offer> offers = itemPrice.offers;
+                List<Offer> offers = itemPrice.offers;
                 boolean hasMatchingOffer = false;
-                for (CheckoutSolution.Offer offer: offers) {
+                for (Offer offer: offers) {
                     if(quantity >= offer.quantity) {
                         // Handle the case when quantity is greater than the offer quantity, use normal price for excess
                         int priceForIncludedInOffer = BigDecimal.valueOf(quantity / offer.quantity)
@@ -99,9 +96,9 @@ public class CheckliteSolution {
         private String sku;
         private BigDecimal price;
         private int quantity;
-        private List<CheckoutSolution.Offer> offers;
+        private List<Offer> offers;
 
-        ItemPrice(String sku, BigDecimal price, List<CheckoutSolution.Offer> offers) {
+        ItemPrice(String sku, BigDecimal price, List<Offer> offers) {
             this.sku = sku;
             this.price = price;
             this.offers = offers;
@@ -118,9 +115,7 @@ public class CheckliteSolution {
             this.price = price;
         }
     }
-    public Integer checklite(String skus) {
-        throw new SolutionNotImplementedException();
-    }
 
 }
+
 

@@ -1,4 +1,4 @@
-package befaster.solutions.CHL;
+package befaster.solutions.CHK;
 
 import befaster.solutions.CHK.CheckoutSolution;
 import org.junit.Before;
