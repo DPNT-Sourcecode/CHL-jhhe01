@@ -36,9 +36,10 @@ public class CheckoutSolutionTest {
         assertThat(check.checkout("AAABCD"), equalTo(195));
         assertThat(check.checkout("AAABBCD"), equalTo(210));
 
-        assertThat(check.checkout("AAAAAABCD"), equalTo(325));
+        assertThat(check.checkout("AAAAAABCD"), equalTo(315));
 
         assertThat(check.checkout("ABBBCD"), equalTo(160));
+
 
         assertThat(check.checkout(""), equalTo(0));
         assertThat(check.checkout(" "), equalTo(0));
@@ -46,5 +47,15 @@ public class CheckoutSolutionTest {
         assertThat(check.checkout("34"), equalTo(-1));
         assertThat(check.checkout("#A"), equalTo(-1));
 
+        assertThat(check.checkout("BEE"), equalTo(80));
+        assertThat(check.checkout("BEEEE"), equalTo(160));
+        assertThat(check.checkout("BBEEEE"), equalTo(160));
+        assertThat(check.checkout("EEBB"), equalTo(110));
+
+        assertThat(check.checkout("E"), equalTo(40));
+        assertThat(check.checkout("ABCDE"), equalTo(155));
+        assertThat(check.checkout("AAAAA"), equalTo(200));
+
     }
 }
+
