@@ -1,12 +1,13 @@
-package befaster.solutions.HLO;
+package befaster.solutions.CHL;
 
+import befaster.solutions.HLO.HelloSolution;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-public class HelloSolutionTest {
+public class CheckliteSolution {
     private HelloSolution hello;
 
     @Before
