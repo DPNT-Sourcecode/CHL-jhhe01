@@ -83,14 +83,16 @@ public class CheckoutSolution {
                     String[] entries = line.split("\\| ");
                     String sku = entries[1].trim();
                     BigDecimal price = BigDecimal.valueOf(Integer.parseInt(entries[2].trim()));
-                    String[] offers = entries[3].trim().split(",");
+
                     List<Offer> offerList = new ArrayList<>();
-                    if(offers.length > 0) {
+                    if(entries[3].contains("for") || entries[3].contains("get")) {
+                        String[] offers = entries[3].trim().split(",");
                         for (String offer : offers) {
                             offerList.add(parseOffer(offer));
                         }
                     }
                     ItemPrice itemPrice = new ItemPrice(sku, price, offerList);
+
                     priceMap.put(sku, itemPrice);
                 }
                 lineNumber.incrementAndGet();
@@ -271,6 +273,7 @@ public class CheckoutSolution {
     }
 
 }
+
 
 
 
