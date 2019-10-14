@@ -1,7 +1,6 @@
 package befaster;
 
 import befaster.solutions.ARRS.ArraySumSolution;
-import befaster.solutions.CHK.CheckoutSolution;
 import befaster.solutions.CHL.CheckliteSolution;
 import befaster.solutions.FIZ.FizzBuzzSolution;
 import befaster.solutions.HLO.HelloSolution;
@@ -28,7 +27,7 @@ class EntryPointMapping {
     private final ArraySumSolution arraySumSolution;
     private final IntRangeSolution intRangeSolution;
     private final FizzBuzzSolution fizzBuzzSolution;
-    private final CheckoutSolution checkoutSolution;
+    private final CheckliteSolution checkoutSolution;
     private final CheckliteSolution checkliteSolution;
 
     EntryPointMapping() {
@@ -37,7 +36,7 @@ class EntryPointMapping {
         arraySumSolution = new ArraySumSolution();
         intRangeSolution = new IntRangeSolution();
         fizzBuzzSolution = new FizzBuzzSolution();
-        checkoutSolution = new CheckoutSolution();
+        checkliteSolution = new befaster.solutions.CHK.CheckoutSolution();
         checkliteSolution = new CheckliteSolution();
     }
 
@@ -66,10 +65,11 @@ class EntryPointMapping {
     }
 
     Object checkout(List<JsonElement> p) {
-        return checkoutSolution.checkout(p.get(0).getAsString());
+        return checkliteSolution.checkout(p.get(0).getAsString());
     }
 
     Object checklite(List<JsonElement> p) {
         return checkliteSolution.checklite(p.get(0).getAsString());
     }
 }
+

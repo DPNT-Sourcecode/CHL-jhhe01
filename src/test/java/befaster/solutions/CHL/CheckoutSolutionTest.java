@@ -6,7 +6,7 @@ import org.junit.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-public class CheckliteSolutionTest {
+public class CheckoutSolutionTest {
     private CheckliteSolution check;
 
     @Before
@@ -48,4 +48,3 @@ public class CheckliteSolutionTest {
 
     }
 }
-
