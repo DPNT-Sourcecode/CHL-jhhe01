@@ -48,34 +48,6 @@ public class CheckoutSolution {
 +------+-------+------------------------+
      */
     public CheckoutSolution()  {
-        Offer offerA1 = new Offer(3, BigDecimal.valueOf(130));
-        Offer offerA2 = new Offer(5, BigDecimal.valueOf(200));
-        List<Offer> offerA = new ArrayList<>();
-
-        offerA.add(offerA1);
-        offerA.add(offerA2);
-
-//        ItemPrice priceA = new ItemPrice("A", BigDecimal.valueOf(50), offerA);
-//        priceMap.put("A", priceA);
-//
-//        Offer offerB = new Offer(2, BigDecimal.valueOf(45));
-//        ItemPrice priceB = new ItemPrice("B", BigDecimal.valueOf(30), Collections.singletonList(offerB));
-//        priceMap.put("B", priceB);
-//
-//        ItemPrice priceC = new ItemPrice("C", BigDecimal.valueOf(20), Collections.emptyList());
-//        priceMap.put("C", priceC);
-//
-//        ItemPrice priceD = new ItemPrice("D", BigDecimal.valueOf(15), Collections.emptyList());
-//        priceMap.put("D", priceD);
-//
-//        Offer offerE = new Offer(2, "B");
-//        ItemPrice priceE = new ItemPrice("E", BigDecimal.valueOf(40), Collections.singletonList(offerE));
-//        priceMap.put("E", priceE);
-//
-//        Offer offerF = new Offer(3, "F");
-//        ItemPrice priceF = new ItemPrice("F", BigDecimal.valueOf(10), Collections.singletonList(offerF));
-//        priceMap.put("F", priceF);
-
         final AtomicInteger lineNumber = new AtomicInteger(1);
         try(Stream<String> stream = Files.lines(Paths.get("/Users/prasad/workspace/accelerate_runner/challenges/CHL_R4.txt"))) {
             stream.forEach(line -> {
@@ -276,3 +248,4 @@ public class CheckoutSolution {
     }
 
 }
+
