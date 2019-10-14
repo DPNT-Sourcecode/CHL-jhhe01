@@ -57,7 +57,3 @@ public class CheckliteSolutionTest {
         assertThat(check.checklite("AAAAA"), equalTo(200));
     }
 }
-
-
-
-
