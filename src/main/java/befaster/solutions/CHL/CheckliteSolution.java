@@ -42,13 +42,17 @@ public class CheckliteSolution {
         String[] itemQuantityArray = skus.split("[, ]+");
         int total = 0;
         for (String itemQuantity : itemQuantityArray) {
-            String sku = itemQuantity.substring(itemQuantity.length() - 2);
+            String sku = itemQuantity.substring(itemQuantity.length() - 1);
             int quantity;
 
-            try {
-                quantity = Integer.valueOf(itemQuantity.substring(0, itemQuantity.length() - 2));
-            } catch (NumberFormatException e) {
-                return -1;
+            if(itemQuantity.length() == 1) {
+                quantity = 1;
+            } else {
+                try {
+                    quantity = Integer.valueOf(itemQuantity.substring(0, itemQuantity.length() - 1));
+                } catch (NumberFormatException e) {
+                    return -1;
+                }
             }
 
             ItemPrice itemPrice = priceMap.get(sku);
@@ -101,4 +105,5 @@ public class CheckliteSolution {
         }
     }
 }
+
 
