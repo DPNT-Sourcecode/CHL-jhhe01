@@ -8,7 +8,7 @@ public class CheckoutSolution {
     private Map<String, ItemPrice> priceMap = new HashMap<>();
 
     /*
- +------+-------+------------------------+
++------+-------+------------------------+
 | Item | Price | Special offers         |
 +------+-------+------------------------+
 | A    | 50    | 3A for 130, 5A for 200 |
@@ -16,6 +16,7 @@ public class CheckoutSolution {
 | C    | 20    |                        |
 | D    | 15    |                        |
 | E    | 40    | 2E get one B free      |
+| F    | 10    | 2F get one F free      |
 +------+-------+------------------------+
      */
     public CheckoutSolution() {
@@ -42,6 +43,10 @@ public class CheckoutSolution {
         Offer offerE = new Offer(2, "B");
         ItemPrice priceE = new ItemPrice("E", BigDecimal.valueOf(40), Collections.singletonList(offerE));
         priceMap.put("E", priceE);
+
+        Offer offerF = new Offer(2, "F");
+        ItemPrice priceF = new ItemPrice("F", BigDecimal.valueOf(10), Collections.singletonList(offerF));
+        priceMap.put("F", priceF);
     }
 
     public Integer checkout(String skus) {
@@ -203,4 +208,3 @@ public class CheckoutSolution {
     }
 
 }
-
