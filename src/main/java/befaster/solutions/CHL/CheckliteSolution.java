@@ -80,7 +80,7 @@ public class CheckliteSolution {
                             total += priceForIncludedInOffer;
                         }
                     } else {
-                        int numberOfItemsFree = itemPrice.quantity / offer.quantity;
+                        int numberOfItemsFree = quantity / offer.quantity;
                         if(input.containsKey(offer.item.charAt(0))) {
                             int offerItemQuantity = input.get(offer.item.charAt(0));
 
@@ -121,7 +121,6 @@ public class CheckliteSolution {
     class ItemPrice {
         private String sku;
         private BigDecimal price;
-        private int quantity;
         private List<Offer> offers;
 
         ItemPrice(String sku, BigDecimal price, List<Offer> offers) {
@@ -149,4 +148,3 @@ public class CheckliteSolution {
     }
 
 }
-

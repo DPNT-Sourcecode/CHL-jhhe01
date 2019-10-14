@@ -91,7 +91,6 @@ public class CheckoutSolution {
     class ItemPrice {
         private String sku;
         private BigDecimal price;
-        private int quantity;
         private List<Offer> offers;
 
         ItemPrice(String sku, BigDecimal price, List<Offer> offers) {
@@ -112,4 +111,3 @@ public class CheckoutSolution {
         }
     }
 }
-

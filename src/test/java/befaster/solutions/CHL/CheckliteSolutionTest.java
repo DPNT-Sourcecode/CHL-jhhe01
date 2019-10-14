@@ -47,8 +47,8 @@ public class CheckliteSolutionTest {
 //        assertThat(check.checklite("34"), equalTo(-1));
 //        assertThat(check.checklite("#A"), equalTo(-1));
 
-        assertThat(check.checklite("BEE"), equalTo(80));
+//        assertThat(check.checklite("BEE"), equalTo(80));
+//        assertThat(check.checklite("BEEEE"), equalTo(160));
+        assertThat(check.checklite("BBEEEE"), equalTo(160));
     }
 }
-
-
