@@ -44,7 +44,7 @@ public class CheckoutSolution {
         ItemPrice priceE = new ItemPrice("E", BigDecimal.valueOf(40), Collections.singletonList(offerE));
         priceMap.put("E", priceE);
 
-        Offer offerF = new Offer(2, "F");
+        Offer offerF = new Offer(3, "F");
         ItemPrice priceF = new ItemPrice("F", BigDecimal.valueOf(10), Collections.singletonList(offerF));
         priceMap.put("F", priceF);
     }
@@ -208,3 +208,4 @@ public class CheckoutSolution {
     }
 
 }
+
