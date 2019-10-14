@@ -26,6 +26,9 @@ public class CheckliteSolutionTest {
      */
     @Test
     public void checklite() {
+        assertThat(check.checklite("A"), equalTo(50));
+        assertThat(check.checklite("1A"), equalTo(50));
+
         assertThat(check.checklite("1A 1B 1C 1D"), equalTo(115));
         assertThat(check.checklite("A B C D"), equalTo(115));
         assertThat(check.checklite("A, B, C, D"), equalTo(115));
@@ -38,10 +41,10 @@ public class CheckliteSolutionTest {
 
         assertThat(check.checklite("A 3B C D"), equalTo(160));
 
-        assertThat(check.checklite(""), equalTo(160));
+        assertThat(check.checklite(""), equalTo(-1));
+        assertThat(check.checklite("%^&* %$ 2A"), equalTo(-1));
+        assertThat(check.checklite("34"), equalTo(-1));
+        assertThat(check.checklite("#A"), equalTo(-1));
 
     }
 }
-
-
-

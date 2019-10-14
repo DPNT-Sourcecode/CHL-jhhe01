@@ -39,6 +39,9 @@ public class CheckliteSolution {
     }
 
     public Integer checklite(String skus) {
+        if(skus.length() < 1) {
+            return -1;
+        }
         String[] itemQuantityArray = skus.split("[, ]+");
         int total = 0;
         for (String itemQuantity : itemQuantityArray) {
@@ -110,6 +113,3 @@ public class CheckliteSolution {
         }
     }
 }
-
-
-
