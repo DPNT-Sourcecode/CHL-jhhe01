@@ -1,7 +1,14 @@
 package befaster.solutions.CHK;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Stream;
 
 public class CheckoutSolution {
 
@@ -39,7 +46,7 @@ public class CheckoutSolution {
 | Z    | 50    |                        |
 +------+-------+------------------------+
      */
-    public CheckoutSolution() {
+    public CheckoutSolution() throws IOException {
         Offer offerA1 = new Offer(3, BigDecimal.valueOf(130));
         Offer offerA2 = new Offer(5, BigDecimal.valueOf(200));
         List<Offer> offerA = new ArrayList<>();
@@ -68,8 +75,12 @@ public class CheckoutSolution {
         ItemPrice priceF = new ItemPrice("F", BigDecimal.valueOf(10), Collections.singletonList(offerF));
         priceMap.put("F", priceF);
 
-        ItemPrice priceG = new ItemPrice("A", BigDecimal.valueOf(50), offerA);
 
+        try(Stream<String> stream = Files.lines(Paths.get("/Users/prasad/workspace/accelerate_runner/challenges/CHL_R4.txt"))) {
+            stream.forEach(line -> {
+                System.out.println(line);
+            });
+        }
     }
 
     public Integer checkout(String skus) {
@@ -231,5 +242,6 @@ public class CheckoutSolution {
     }
 
 }
+
 
 
