@@ -55,26 +55,26 @@ public class CheckoutSolution {
         offerA.add(offerA1);
         offerA.add(offerA2);
 
-        ItemPrice priceA = new ItemPrice("A", BigDecimal.valueOf(50), offerA);
-        priceMap.put("A", priceA);
-
-        Offer offerB = new Offer(2, BigDecimal.valueOf(45));
-        ItemPrice priceB = new ItemPrice("B", BigDecimal.valueOf(30), Collections.singletonList(offerB));
-        priceMap.put("B", priceB);
-
-        ItemPrice priceC = new ItemPrice("C", BigDecimal.valueOf(20), Collections.emptyList());
-        priceMap.put("C", priceC);
-
-        ItemPrice priceD = new ItemPrice("D", BigDecimal.valueOf(15), Collections.emptyList());
-        priceMap.put("D", priceD);
-
-        Offer offerE = new Offer(2, "B");
-        ItemPrice priceE = new ItemPrice("E", BigDecimal.valueOf(40), Collections.singletonList(offerE));
-        priceMap.put("E", priceE);
-
-        Offer offerF = new Offer(3, "F");
-        ItemPrice priceF = new ItemPrice("F", BigDecimal.valueOf(10), Collections.singletonList(offerF));
-        priceMap.put("F", priceF);
+//        ItemPrice priceA = new ItemPrice("A", BigDecimal.valueOf(50), offerA);
+//        priceMap.put("A", priceA);
+//
+//        Offer offerB = new Offer(2, BigDecimal.valueOf(45));
+//        ItemPrice priceB = new ItemPrice("B", BigDecimal.valueOf(30), Collections.singletonList(offerB));
+//        priceMap.put("B", priceB);
+//
+//        ItemPrice priceC = new ItemPrice("C", BigDecimal.valueOf(20), Collections.emptyList());
+//        priceMap.put("C", priceC);
+//
+//        ItemPrice priceD = new ItemPrice("D", BigDecimal.valueOf(15), Collections.emptyList());
+//        priceMap.put("D", priceD);
+//
+//        Offer offerE = new Offer(2, "B");
+//        ItemPrice priceE = new ItemPrice("E", BigDecimal.valueOf(40), Collections.singletonList(offerE));
+//        priceMap.put("E", priceE);
+//
+//        Offer offerF = new Offer(3, "F");
+//        ItemPrice priceF = new ItemPrice("F", BigDecimal.valueOf(10), Collections.singletonList(offerF));
+//        priceMap.put("F", priceF);
 
         final AtomicInteger lineNumber = new AtomicInteger(1);
         try(Stream<String> stream = Files.lines(Paths.get("/Users/prasad/workspace/accelerate_runner/challenges/CHL_R4.txt"))) {
@@ -83,13 +83,30 @@ public class CheckoutSolution {
                     String[] entries = line.split("\\| ");
                     String sku = entries[1].trim();
                     BigDecimal price = BigDecimal.valueOf(Integer.parseInt(entries[2].trim()));
-                    String offer = entries[3];
-                    System.out.println(offer);
+                    String[] offers = entries[3].split(",");
+                    List<Offer> offerList = new ArrayList<>();
+                    for (String offer : offers) {
+                        offerList.add(parseOffer(offer));
+                    }
+                    ItemPrice itemPrice = new ItemPrice(sku, price, offerList);
+                    priceMap.put(sku, itemPrice);
                 }
                 lineNumber.incrementAndGet();
             });
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private Offer parseOffer(String str) {
+        String[] strs = str.split(" ");
+        if(str.contains("for")) {
+            int quantity = Integer.parseInt(strs[0].substring(0, strs[0].length() - 1));
+            BigDecimal price = BigDecimal.valueOf(Integer.parseInt(strs[2].trim()));
+            return new Offer(quantity, price);
+        } else {
+            int quantity = Integer.parseInt(strs[0].substring(0, strs[0].length() - 1));
+            return new Offer(quantity, strs[3]);
         }
     }
 
@@ -252,6 +269,7 @@ public class CheckoutSolution {
     }
 
 }
+
 
 
 
