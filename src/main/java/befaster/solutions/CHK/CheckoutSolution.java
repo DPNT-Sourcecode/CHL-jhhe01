@@ -80,7 +80,7 @@ public class CheckoutSolution {
         try(Stream<String> stream = Files.lines(Paths.get("/Users/prasad/workspace/accelerate_runner/challenges/CHL_R4.txt"))) {
             stream.forEach(line -> {
                 if (lineNumber.intValue() >= 12 && lineNumber.intValue() <= 37) {
-                    String[] entries = line.split("|");
+                    String[] entries = line.split("\\| ");
                 }
                 lineNumber.incrementAndGet();
             });
@@ -248,4 +248,5 @@ public class CheckoutSolution {
     }
 
 }
+
 
