@@ -124,6 +124,9 @@ public class CheckliteSolution {
                                 int balanceItems  = remainingItems % offer.quantity;
                                 int priceForRest = itemPrice.price.multiply(BigDecimal.valueOf(balanceItems)).intValue();
                                 itemTotal = priceForIncludedInOffer + priceForRest;
+                            } else {
+                                itemTotal += itemPrice.price.multiply(BigDecimal.valueOf(remainingItems)).intValue();
+
                             }
                         }
                     }
@@ -196,4 +199,5 @@ public class CheckliteSolution {
     }
 
 }
+
 
