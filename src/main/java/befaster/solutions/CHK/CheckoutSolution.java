@@ -110,6 +110,9 @@ public class CheckoutSolution {
             return new Offer(quantity, price);
         } else {
             int quantity = Integer.parseInt(strs[0].substring(0, strs[0].length() - 1));
+            if(strs[3].equals(strs[0].substring(strs[0].length() - 1))) {
+                quantity++;
+            }
             return new Offer(quantity, strs[3]);
         }
     }
@@ -273,9 +276,3 @@ public class CheckoutSolution {
     }
 
 }
-
-
-
-
-
-
