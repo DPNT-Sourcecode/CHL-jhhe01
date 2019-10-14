@@ -203,8 +203,3 @@ public class CheckliteSolution {
     }
 
 }
-
-
-
-
-
