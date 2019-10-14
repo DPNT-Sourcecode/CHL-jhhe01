@@ -34,24 +34,28 @@ public class CheckoutSolution {
     }
 
     public Integer checkout(String skus) {
-        if(skus == null || skus.trim().isEmpty()) {
+        if(skus == null) {
             return -1;
+        } else if(skus.trim().isEmpty()) {
+            return 0;
         }
+
+        Map<Character, Integer> input = new HashMap<>();
+        for (Character c : skus.toCharArray()) {
+            if(input.containsKey(c)) {
+                int quantity = input.get(c);
+                quantity++;
+                input.put(c, quantity);
+            } else {
+                input.put(c, 1);
+            }
+        }
+
         String[] itemQuantityArray = skus.split("[, ]+");
         int total = 0;
-        for (String itemQuantity : itemQuantityArray) {
-            String sku = itemQuantity.substring(itemQuantity.length() - 1);
-            int quantity;
-
-            if(itemQuantity.length() == 1) {
-                quantity = 1;
-            } else {
-                try {
-                    quantity = Integer.valueOf(itemQuantity.substring(0, itemQuantity.length() - 1));
-                } catch (NumberFormatException e) {
-                    return -1;
-                }
-            }
+        for (Map.Entry<Character, Integer> itemQuantity : input.entrySet()) {
+            String sku = itemQuantity.getKey().toString();
+            int quantity = itemQuantity.getValue();
 
             ItemPrice itemPrice = priceMap.get(sku);
 
@@ -109,5 +113,6 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
