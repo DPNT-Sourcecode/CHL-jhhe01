@@ -51,7 +51,6 @@ public class CheckoutSolution {
             }
         }
 
-        String[] itemQuantityArray = skus.split("[, ]+");
         int total = 0;
         for (Map.Entry<Character, Integer> itemQuantity : input.entrySet()) {
             String sku = itemQuantity.getKey().toString();
@@ -113,3 +112,4 @@ public class CheckoutSolution {
         }
     }
 }
+
