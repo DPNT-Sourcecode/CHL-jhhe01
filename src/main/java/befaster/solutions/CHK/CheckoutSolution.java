@@ -81,6 +81,10 @@ public class CheckoutSolution {
             stream.forEach(line -> {
                 if (lineNumber.intValue() >= 12 && lineNumber.intValue() <= 37) {
                     String[] entries = line.split("\\| ");
+                    String sku = entries[1].trim();
+                    BigDecimal price = BigDecimal.valueOf(Integer.parseInt(entries[2].trim()));
+                    String offer = entries[3];
+                    System.out.println(offer);
                 }
                 lineNumber.incrementAndGet();
             });
@@ -248,5 +252,6 @@ public class CheckoutSolution {
     }
 
 }
+
 
 
