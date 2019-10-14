@@ -79,10 +79,7 @@ public class CheckoutSolution {
         final AtomicInteger lineNumber = new AtomicInteger(1);
         try(Stream<String> stream = Files.lines(Paths.get("/Users/prasad/workspace/accelerate_runner/challenges/CHL_R4.txt"))) {
             stream.forEach(line -> {
-                if(lineNumber.intValue() > 37) {
-                    return;
-                }
-               if (lineNumber.intValue() < 12) {
+               if (lineNumber.intValue() < 12 || lineNumber.intValue() > 37) {
                    lineNumber.incrementAndGet();
                } else {
                    System.out.println(line);
@@ -252,8 +249,3 @@ public class CheckoutSolution {
     }
 
 }
-
-
-
-
-
