@@ -46,7 +46,7 @@ public class CheckoutSolution {
 | Z    | 50    |                        |
 +------+-------+------------------------+
      */
-    public CheckoutSolution() throws IOException {
+    public CheckoutSolution()  {
         Offer offerA1 = new Offer(3, BigDecimal.valueOf(130));
         Offer offerA2 = new Offer(5, BigDecimal.valueOf(200));
         List<Offer> offerA = new ArrayList<>();
@@ -80,6 +80,8 @@ public class CheckoutSolution {
             stream.forEach(line -> {
                 System.out.println(line);
             });
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -242,6 +244,7 @@ public class CheckoutSolution {
     }
 
 }
+
 
 
 
