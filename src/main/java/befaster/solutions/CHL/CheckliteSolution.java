@@ -53,7 +53,10 @@ public class CheckliteSolution {
 
         Map<Character, Integer> input = parseInput(skus);
 
-        int total = 0;
+//        int total = 0;
+        Map<String, Integer> cartItemTotals = new HashMap<>();
+        Map<String, Integer> freeItemTotals = new HashMap<>();
+
         for (Map.Entry<Character, Integer> itemQuantity : input.entrySet()) {
             String sku = itemQuantity.getKey().toString();
             int quantity = itemQuantity.getValue();
@@ -65,7 +68,8 @@ public class CheckliteSolution {
             }
 
             if(itemPrice.offers.isEmpty()) {
-                total += itemPrice.price.multiply(BigDecimal.valueOf(quantity)).intValue();
+                updateCartItemTotals(cartItemTotals, sku, itemPrice.price.multiply(BigDecimal.valueOf(quantity))
+                        .intValue());
             } else {
                 List<Offer> offers = itemPrice.offers;
 
@@ -77,7 +81,7 @@ public class CheckliteSolution {
                             int priceForIncludedInOffer = BigDecimal.valueOf(remainingQuantity / offer.quantity)
                                     .multiply(offer.price).intValue();
                             remainingQuantity = quantity % offer.quantity;
-                            total += priceForIncludedInOffer;
+                            updateCartItemTotals(cartItemTotals, sku, priceForIncludedInOffer);
                         }
                     } else {
                         int numberOfItemsFree = quantity / offer.quantity;
@@ -85,23 +89,67 @@ public class CheckliteSolution {
                             int offerItemQuantity = input.get(offer.item.charAt(0));
 
                             if(offerItemQuantity >= numberOfItemsFree) {
-                                total -= priceMap.get(offer.item).price.multiply(BigDecimal
-                                        .valueOf(numberOfItemsFree)).intValue();
+                                updateFreeItemTotals(freeItemTotals, offer.item, numberOfItemsFree);
+
                             } else {
-                                total -= priceMap.get(offer.item).price.multiply(BigDecimal
-                                        .valueOf(offerItemQuantity)).intValue();
+                                updateFreeItemTotals(freeItemTotals, offer.item, offerItemQuantity);
                             }
                         }
                     }
                 }
 
                 if(remainingQuantity > 0) {
-                    total += itemPrice.price.multiply(BigDecimal.valueOf(remainingQuantity)).intValue();
+                    updateCartItemTotals(cartItemTotals, sku, itemPrice.price.multiply(
+                            BigDecimal.valueOf(remainingQuantity)).intValue());
                 }
             }
 
         }
+
+        int total = 0;
+        for (String item : cartItemTotals.keySet()) {
+            if(freeItemTotals.containsKey(item)) {
+                int numOfFree = freeItemTotals.get(item);
+                int itemCount = input.get(item.charAt(0));
+                int remainingItems = itemCount - numOfFree;
+                int itemTotal = 0;
+                if(remainingItems > 0) {
+                    ItemPrice itemPrice = priceMap.get(item);
+                    List<Offer> offers = itemPrice.offers;
+                    for (Offer offer: offers) {
+                        if(offer.price != null) {
+                            if (remainingItems >= offer.quantity) {
+                                int priceForIncludedInOffer = BigDecimal.valueOf(remainingItems / offer.quantity)
+                                        .multiply(offer.price).intValue();
+                                int balanceItems  = remainingItems % offer.quantity;
+                                int priceForRest = itemPrice.price.multiply(BigDecimal.valueOf(balanceItems)).intValue();
+                                itemTotal = priceForIncludedInOffer + priceForRest;
+                            }
+                        }
+                    }
+                }
+                total += itemTotal;
+            } else {
+                total += cartItemTotals.get(item);
+            }
+        }
         return total;
+    }
+
+    private void updateCartItemTotals(Map<String, Integer> cartItemTotals, String sku, int total) {
+        if(cartItemTotals.containsKey(sku)) {
+            cartItemTotals.put(sku, cartItemTotals.get(sku) + total);
+        } else {
+            cartItemTotals.put(sku, total);
+        }
+    }
+
+    private void updateFreeItemTotals(Map<String, Integer> freeItemTotals, String sku, int total) {
+        if(freeItemTotals.containsKey(sku)) {
+            freeItemTotals.put(sku, freeItemTotals.get(sku) + total);
+        } else {
+            freeItemTotals.put(sku, total);
+        }
     }
 
     private Map<Character, Integer> parseInput(String skus) {
@@ -148,3 +196,4 @@ public class CheckliteSolution {
     }
 
 }
+
