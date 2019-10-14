@@ -65,6 +65,7 @@ public class CheckliteSolution {
                 total += itemPrice.price.multiply(BigDecimal.valueOf(quantity)).intValue();
             } else {
                 List<Offer> offers = itemPrice.offers;
+                boolean hasMatchingOffer = false;
                 for (Offer offer: offers) {
                     if(quantity >= offer.quantity) {
                         int priceForIncludedInOffer = BigDecimal.valueOf(quantity / offer.quantity)
@@ -73,7 +74,11 @@ public class CheckliteSolution {
                                 .multiply(itemPrice.price).intValue();
                         total += priceForIncludedInOffer;
                         total += priceForRemainder;
+                        hasMatchingOffer = true;
                     }
+                }
+                if(!hasMatchingOffer) {
+                    total += itemPrice.price.multiply(BigDecimal.valueOf(quantity)).intValue();
                 }
             }
 
@@ -105,5 +110,6 @@ public class CheckliteSolution {
         }
     }
 }
+
 
 

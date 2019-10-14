@@ -27,6 +27,10 @@ public class CheckliteSolutionTest {
     @Test
     public void checklite() {
         assertThat(check.checklite("1A 1B 1C 1D"), equalTo(115));
+        assertThat(check.checklite("A B C D"), equalTo(115));
+        assertThat(check.checklite("A, B, C, D"), equalTo(115));
+        assertThat(check.checklite("A B 2C 3D"), equalTo(165));
     }
 }
+
 
