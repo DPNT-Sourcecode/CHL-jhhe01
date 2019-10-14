@@ -53,7 +53,6 @@ public class CheckliteSolution {
 
         Map<Character, Integer> input = parseInput(skus);
 
-//        int total = 0;
         Map<String, Integer> cartItemTotals = new HashMap<>();
         Map<String, Integer> freeItemTotals = new HashMap<>();
 
@@ -73,17 +72,8 @@ public class CheckliteSolution {
             } else {
                 List<Offer> offers = itemPrice.offers;
 
-                int remainingQuantity = quantity;
-
                 for (Offer offer: offers) {
-                    if(offer.price != null) {
-                        if (remainingQuantity >= offer.quantity) {
-                            int priceForIncludedInOffer = BigDecimal.valueOf(remainingQuantity / offer.quantity)
-                                    .multiply(offer.price).intValue();
-                            remainingQuantity = quantity % offer.quantity;
-                            updateCartItemTotals(cartItemTotals, sku, priceForIncludedInOffer);
-                        }
-                    } else {
+                    if(offer.price == null) {
                         int numberOfItemsFree = quantity / offer.quantity;
                         if(input.containsKey(offer.item.charAt(0))) {
                             int offerItemQuantity = input.get(offer.item.charAt(0));
@@ -98,10 +88,7 @@ public class CheckliteSolution {
                     }
                 }
 
-                if(remainingQuantity > 0) {
-                    updateCartItemTotals(cartItemTotals, sku, itemPrice.price.multiply(
-                            BigDecimal.valueOf(remainingQuantity)).intValue());
-                }
+                updateCartItemTotals(cartItemTotals, sku, priceWithOffers(itemPrice, quantity));
             }
 
         }
@@ -112,26 +99,6 @@ public class CheckliteSolution {
                 int numOfFree = freeItemTotals.get(item);
                 int itemCount = input.get(item.charAt(0));
                 int remainingItems = itemCount - numOfFree;
-                int itemTotal = 0;
-//                if(remainingItems > 0) {
-//                    ItemPrice itemPrice = priceMap.get(item);
-//                    List<Offer> offers = itemPrice.offers;
-//                    for (Offer offer: offers) {
-//                        if(offer.price != null) {
-//                            if (remainingItems >= offer.quantity) {
-//                                int priceForIncludedInOffer = BigDecimal.valueOf(remainingItems / offer.quantity)
-//                                        .multiply(offer.price).intValue();
-//                                int balanceItems  = remainingItems % offer.quantity;
-//                                int priceForRest = itemPrice.price.multiply(BigDecimal.valueOf(balanceItems)).intValue();
-//                                itemTotal = priceForIncludedInOffer + priceForRest;
-//                            } else {
-//                                itemTotal += itemPrice.price.multiply(BigDecimal.valueOf(remainingItems)).intValue();
-//
-//                            }
-//                        }
-//                    }
-//                }
-//                total += itemTotal;
                 total = priceWithOffers(priceMap.get(item), remainingItems);
             } else {
                 total += cartItemTotals.get(item);
@@ -207,7 +174,7 @@ public class CheckliteSolution {
 
     }
 
-    class  Offer {
+    class  Offer implements Comparable {
         private int quantity;
         private BigDecimal price;
         private String item;
@@ -217,13 +184,19 @@ public class CheckliteSolution {
             this.price = price;
         }
 
-        public Offer(int quantity, String item) {
+        Offer(int quantity, String item) {
             this.quantity = quantity;
             this.item = item;
+        }
+
+        @Override
+        public int compareTo(Object o) {
+            return 0;
         }
     }
 
 }
+
 
 
 
