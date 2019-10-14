@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 public class CheckoutSolution {
@@ -75,10 +76,17 @@ public class CheckoutSolution {
         ItemPrice priceF = new ItemPrice("F", BigDecimal.valueOf(10), Collections.singletonList(offerF));
         priceMap.put("F", priceF);
 
-
+        final AtomicInteger lineNumber = new AtomicInteger(1);
         try(Stream<String> stream = Files.lines(Paths.get("/Users/prasad/workspace/accelerate_runner/challenges/CHL_R4.txt"))) {
             stream.forEach(line -> {
-                System.out.println(line);
+                if(lineNumber.intValue() > 37) {
+                    return;
+                }
+               if (lineNumber.intValue() < 12) {
+                   lineNumber.incrementAndGet();
+               } else {
+                   System.out.println(line);
+               }
             });
         } catch (IOException e) {
             e.printStackTrace();
@@ -244,6 +252,7 @@ public class CheckoutSolution {
     }
 
 }
+
 
 
 
