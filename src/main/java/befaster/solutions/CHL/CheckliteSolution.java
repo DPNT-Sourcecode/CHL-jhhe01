@@ -22,9 +22,9 @@ public class CheckliteSolution {
         Offer offerA1 = new Offer(3, BigDecimal.valueOf(130));
         Offer offerA2 = new Offer(5, BigDecimal.valueOf(200));
         List<Offer> offerA = new ArrayList<>();
-        // Offers are ordered such that offers with higher value will be in the front of the list
-        offerA.add(offerA2);
+
         offerA.add(offerA1);
+        offerA.add(offerA2);
 
         ItemPrice priceA = new ItemPrice("A", BigDecimal.valueOf(50), offerA);
         priceMap.put("A", priceA);
@@ -126,6 +126,8 @@ public class CheckliteSolution {
     private int priceWithOffers(ItemPrice itemPrice, int quantity) {
         List<Offer> offers = itemPrice.offers;
 
+        // Sort offers such that offers with highest quantity is considered first.
+        Collections.sort(offers);
         int remainingQuantity = quantity;
         int total = 0;
 
@@ -174,7 +176,7 @@ public class CheckliteSolution {
 
     }
 
-    class  Offer implements Comparable {
+    class  Offer implements Comparable<Offer> {
         private int quantity;
         private BigDecimal price;
         private String item;
@@ -190,12 +192,18 @@ public class CheckliteSolution {
         }
 
         @Override
-        public int compareTo(Object o) {
+        public int compareTo(Offer o) {
+            if(this.quantity < o.quantity) {
+                return 1;
+            } else if(this.quantity > o.quantity) {
+                return -1;
+            }
             return 0;
         }
     }
 
 }
+
 
 
 
