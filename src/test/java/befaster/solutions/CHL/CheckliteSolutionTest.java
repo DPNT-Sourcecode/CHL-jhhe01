@@ -41,10 +41,11 @@ public class CheckliteSolutionTest {
 
         assertThat(check.checklite("A 3B C D"), equalTo(160));
 
-        assertThat(check.checklite(""), equalTo(-1));
+        assertThat(check.checklite(" "), equalTo(-1));
         assertThat(check.checklite("%^&* %$ 2A"), equalTo(-1));
         assertThat(check.checklite("34"), equalTo(-1));
         assertThat(check.checklite("#A"), equalTo(-1));
 
     }
 }
+

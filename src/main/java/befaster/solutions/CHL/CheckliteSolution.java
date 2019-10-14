@@ -39,7 +39,7 @@ public class CheckliteSolution {
     }
 
     public Integer checklite(String skus) {
-        if(skus.length() < 1) {
+        if(skus == null || skus.trim().isEmpty()) {
             return -1;
         }
         String[] itemQuantityArray = skus.split("[, ]+");
@@ -71,6 +71,7 @@ public class CheckliteSolution {
                 boolean hasMatchingOffer = false;
                 for (Offer offer: offers) {
                     if(quantity >= offer.quantity) {
+                        // Handle the case when quantity is greater than the offer quantity, use normal price for excess
                         int priceForIncludedInOffer = BigDecimal.valueOf(quantity / offer.quantity)
                                 .multiply(offer.price).intValue();
                         int priceForRemainder = BigDecimal.valueOf(quantity % offer.quantity)
@@ -113,3 +114,4 @@ public class CheckliteSolution {
         }
     }
 }
+
