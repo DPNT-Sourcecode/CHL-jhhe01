@@ -51,13 +51,13 @@ public class CheckliteSolution {
             return 0;
         }
 
-        Map<Character, Integer> input = parseInput(skus);
+        Map<String, Integer> input = parseInput(skus);
 
         Map<String, Integer> cartItemTotals = new HashMap<>();
         Map<String, Integer> freeItemTotals = new HashMap<>();
 
-        for (Map.Entry<Character, Integer> itemQuantity : input.entrySet()) {
-            String sku = itemQuantity.getKey().toString();
+        for (Map.Entry<String, Integer> itemQuantity : input.entrySet()) {
+            String sku = itemQuantity.getKey();
             int quantity = itemQuantity.getValue();
 
             ItemPrice itemPrice = priceMap.get(sku);
@@ -149,15 +149,15 @@ public class CheckliteSolution {
         return total;
     }
 
-    private Map<Character, Integer> parseInput(String skus) {
-        Map<Character, Integer> input = new HashMap<>();
+    private Map<String, Integer> parseInput(String skus) {
+        Map<String, Integer> input = new HashMap<>();
         for (Character c : skus.toCharArray()) {
-            if(input.containsKey(c)) {
-                int quantity = input.get(c);
+            if(input.containsKey(c.toString())) {
+                int quantity = input.get(c.toString());
                 quantity++;
-                input.put(c, quantity);
+                input.put(c.toString(), quantity);
             } else {
-                input.put(c, 1);
+                input.put(c.toString(), 1);
             }
         }
         return input;
@@ -203,4 +203,5 @@ public class CheckliteSolution {
     }
 
 }
+
 
