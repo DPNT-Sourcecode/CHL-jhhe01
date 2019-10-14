@@ -99,7 +99,7 @@ public class CheckliteSolution {
                 int numOfFree = freeItemTotals.get(item);
                 int itemCount = input.get(item.charAt(0));
                 int remainingItems = itemCount - numOfFree;
-                total = priceWithOffers(priceMap.get(item), remainingItems);
+                total += priceWithOffers(priceMap.get(item), remainingItems);
             } else {
                 total += cartItemTotals.get(item);
             }
@@ -203,3 +203,4 @@ public class CheckliteSolution {
     }
 
 }
+

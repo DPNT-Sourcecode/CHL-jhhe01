@@ -52,10 +52,11 @@ public class CheckliteSolutionTest {
 //        assertThat(check.checklite("BBEEEE"), equalTo(160));
 //        assertThat(check.checklite("EEBB"), equalTo(110));
 //
-//        assertThat(check.checklite("E"), equalTo(40));
+        assertThat(check.checklite("E"), equalTo(40));
         assertThat(check.checklite("ABCDE"), equalTo(155));
-//        assertThat(check.checklite("AAAAA"), equalTo(200));
+        assertThat(check.checklite("AAAAA"), equalTo(200));
     }
 }
+
 
 
