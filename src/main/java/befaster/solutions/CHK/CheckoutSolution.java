@@ -83,10 +83,12 @@ public class CheckoutSolution {
                     String[] entries = line.split("\\| ");
                     String sku = entries[1].trim();
                     BigDecimal price = BigDecimal.valueOf(Integer.parseInt(entries[2].trim()));
-                    String[] offers = entries[3].split(",");
+                    String[] offers = entries[3].trim().split(",");
                     List<Offer> offerList = new ArrayList<>();
-                    for (String offer : offers) {
-                        offerList.add(parseOffer(offer));
+                    if(offers.length > 0) {
+                        for (String offer : offers) {
+                            offerList.add(parseOffer(offer));
+                        }
                     }
                     ItemPrice itemPrice = new ItemPrice(sku, price, offerList);
                     priceMap.put(sku, itemPrice);
@@ -99,7 +101,7 @@ public class CheckoutSolution {
     }
 
     private Offer parseOffer(String str) {
-        String[] strs = str.split(" ");
+        String[] strs = str.trim().split(" ");
         if(str.contains("for")) {
             int quantity = Integer.parseInt(strs[0].substring(0, strs[0].length() - 1));
             BigDecimal price = BigDecimal.valueOf(Integer.parseInt(strs[2].trim()));
@@ -269,6 +271,7 @@ public class CheckoutSolution {
     }
 
 }
+
 
 
 
