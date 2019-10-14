@@ -136,7 +136,7 @@ public class CheckoutSolution {
                 if (remainingQuantity >= offer.quantity) {
                     total  += BigDecimal.valueOf(remainingQuantity / offer.quantity)
                             .multiply(offer.price).intValue();
-                    remainingQuantity = quantity % offer.quantity;
+                    remainingQuantity = remainingQuantity % offer.quantity;
                 }
             }
         }
@@ -203,3 +203,4 @@ public class CheckoutSolution {
     }
 
 }
+
